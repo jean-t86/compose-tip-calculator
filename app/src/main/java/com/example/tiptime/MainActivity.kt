@@ -180,7 +180,7 @@ fun EditNumberField(
 }
 
 /**
- * Rounds the Tip Row UI component
+ * Rounds the Tip Row UI Component
  * @param
  */
 @Composable
