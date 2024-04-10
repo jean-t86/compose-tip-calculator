@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.tiptime
+package me.tadebois.tiptime
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -53,7 +53,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.tiptime.ui.theme.TipTimeTheme
+import me.tadebois.tiptime.R
+import me.tadebois.tiptime.ui.theme.TipTimeTheme
 import java.text.NumberFormat
 
 class MainActivity : ComponentActivity() {
@@ -179,6 +180,10 @@ fun EditNumberField(
     )
 }
 
+/**
+ * Rounds the Tip Row UI as a Component
+ * @param
+ */
 @Composable
 fun RoundTheTipRow(
     roundUp: Boolean,

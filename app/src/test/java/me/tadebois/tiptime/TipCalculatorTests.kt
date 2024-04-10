@@ -1,4 +1,4 @@
-package com.example.tiptime
+package me.tadebois.tiptime
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
