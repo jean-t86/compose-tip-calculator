@@ -15,6 +15,7 @@
  */
 package me.tadebois.tiptime
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -47,13 +48,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import me.tadebois.tiptime.R
+import com.mertceyhan.compose.inappreviews.rememberInAppReviewManager
 import me.tadebois.tiptime.ui.theme.TipTimeTheme
 import java.text.NumberFormat
 
@@ -76,6 +78,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TipTimeLayout() {
+    val activity = (LocalContext.current as Activity)
+    val inAppReviewManager = rememberInAppReviewManager()
+
     Column(
         modifier = Modifier
             .padding(40.dp)
@@ -83,6 +88,20 @@ fun TipTimeLayout() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        inAppReviewManager.launchReviewFlow(
+            activity = activity,
+            onReviewRequestSuccess = {
+                // Handle successful review request
+                // Note that Android's In-App Reviews API says;
+                //  "The flow has finished. The API does not indicate whether the user
+                //  reviewed or not, or even whether the review dialog was shown. Thus, no
+                //  matter the result, we continue our app flow."
+                // @see [Launch the in-app review flow](https://developer.android.com/guide/playcore/in-app-review/kotlin-java#launch-review-flow)
+            },
+            onReviewRequestFail = {
+                // Handle review request failure
+            })
+        
         var amountInput by remember { mutableStateOf("") }
         var tipInput by remember { mutableStateOf("") }
         val tipPercent = tipInput.toDoubleOrNull() ?: 0.0
